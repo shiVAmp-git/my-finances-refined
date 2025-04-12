@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -373,232 +374,279 @@ const Index = () => {
         );
       
       default: // Default template
-        
-    return (
-      <>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Balance</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center">
-                <DollarSign className="mr-2 h-4 w-4 text-muted-foreground" />
-                <span className="text-2xl font-bold">${currentBalance.toFixed(2)}</span>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Income</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center">
-                <ArrowUpCircle className="mr-2 h-4 w-4 text-green-500" />
-                <span className="text-2xl font-bold text-green-500">${totalIncome.toFixed(2)}</span>
-              </div>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-sm font-medium text-muted-foreground">Expenses</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex items-center">
-                <ArrowDownCircle className="mr-2 h-4 w-4 text-red-500" />
-                <span className="text-2xl font-bold text-red-500">${totalExpense.toFixed(2)}</span>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        return (
+          <>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium text-muted-foreground">Balance</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center">
+                    <DollarSign className="mr-2 h-4 w-4 text-muted-foreground" />
+                    <span className="text-2xl font-bold">${currentBalance.toFixed(2)}</span>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium text-muted-foreground">Income</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center">
+                    <ArrowUpCircle className="mr-2 h-4 w-4 text-green-500" />
+                    <span className="text-2xl font-bold text-green-500">${totalIncome.toFixed(2)}</span>
+                  </div>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-sm font-medium text-muted-foreground">Expenses</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex items-center">
+                    <ArrowDownCircle className="mr-2 h-4 w-4 text-red-500" />
+                    <span className="text-2xl font-bold text-red-500">${totalExpense.toFixed(2)}</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
 
-        <Tabs defaultValue="overview" className="mb-8" onValueChange={setActiveTab}>
-          <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="overview">Overview</TabsTrigger>
-            <TabsTrigger value="transactions">Transactions</TabsTrigger>
-          </TabsList>
-          
-          <TabsContent value="overview" className="py-4">
-            <Tabs defaultValue="charts">
-              <TabsList className="mb-4">
-                <TabsTrigger value="charts" className="flex items-center">
-                  <BarChartIcon className="h-4 w-4 mr-2" />
-                  Charts
-                </TabsTrigger>
-                <TabsTrigger value="recent" className="flex items-center">
-                  <CreditCard className="h-4 w-4 mr-2" />
-                  Recent
-                </TabsTrigger>
+            <Tabs defaultValue="overview" className="mb-8" onValueChange={setActiveTab}>
+              <TabsList className="grid w-full grid-cols-2">
+                <TabsTrigger value="overview">Overview</TabsTrigger>
+                <TabsTrigger value="transactions">Transactions</TabsTrigger>
               </TabsList>
               
-              <TabsContent value="charts">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center">
-                        <PieChartIcon className="h-5 w-5 mr-2" />
-                        Expense by Category
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="h-[300px]">
-                      {getExpenseCategoryData().length > 0 ? (
-                        <ResponsiveContainer width="100%" height="100%">
-                          <PieChart>
-                            <Pie
-                              data={getExpenseCategoryData()}
-                              cx="50%"
-                              cy="50%"
-                              outerRadius={80}
-                              fill="#8884d8"
-                              dataKey="value"
-                              label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
-                            >
-                              {getExpenseCategoryData().map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                              ))}
-                            </Pie>
-                            <Tooltip formatter={(value) => `$${value}`} />
-                          </PieChart>
-                        </ResponsiveContainer>
-                      ) : (
-                        <div className="h-full flex items-center justify-center text-gray-500">
-                          No expense data available
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
+              <TabsContent value="overview" className="py-4">
+                <Tabs defaultValue="charts">
+                  <TabsList className="mb-4">
+                    <TabsTrigger value="charts" className="flex items-center">
+                      <BarChartIcon className="h-4 w-4 mr-2" />
+                      Charts
+                    </TabsTrigger>
+                    <TabsTrigger value="recent" className="flex items-center">
+                      <CreditCard className="h-4 w-4 mr-2" />
+                      Recent
+                    </TabsTrigger>
+                  </TabsList>
                   
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center">
-                        <BarChartIcon className="h-5 w-5 mr-2" />
-                        Monthly Overview
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="h-[300px]">
-                      {getMonthlyData().length > 0 ? (
-                        <ResponsiveContainer width="100%" height="100%">
-                          <BarChart data={getMonthlyData()}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="name" />
-                            <YAxis />
-                            <Tooltip formatter={(value) => `$${value}`} />
-                            <Legend />
-                            <Bar dataKey="income" fill="#4ade80" name="Income" />
-                            <Bar dataKey="expense" fill="#f87171" name="Expense" />
-                          </BarChart>
-                        </ResponsiveContainer>
-                      ) : (
-                        <div className="h-full flex items-center justify-center text-gray-500">
-                          No monthly data available
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center">
-                        <LineChartIcon className="h-5 w-5 mr-2" />
-                        Balance Trend
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="h-[300px]">
-                      {getMonthlyData().length > 0 ? (
-                        <ResponsiveContainer width="100%" height="100%">
-                          <LineChart data={getMonthlyData()}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="name" />
-                            <YAxis />
-                            <Tooltip formatter={(value) => `$${value}`} />
-                            <Legend />
-                            <Line 
-                              type="monotone" 
-                              dataKey="balance" 
-                              stroke="#8884d8" 
-                              activeDot={{ r: 8 }} 
-                              name="Balance"
-                            />
-                          </LineChart>
-                        </ResponsiveContainer>
-                      ) : (
-                        <div className="h-full flex items-center justify-center text-gray-500">
-                          No trend data available
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
+                  <TabsContent value="charts">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="flex items-center">
+                            <PieChartIcon className="h-5 w-5 mr-2" />
+                            Expense by Category
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="h-[300px]">
+                          {getExpenseCategoryData().length > 0 ? (
+                            <ResponsiveContainer width="100%" height="100%">
+                              <PieChart>
+                                <Pie
+                                  data={getExpenseCategoryData()}
+                                  cx="50%"
+                                  cy="50%"
+                                  outerRadius={80}
+                                  fill="#8884d8"
+                                  dataKey="value"
+                                  label={({ name, percent }) => `${name}: ${(percent * 100).toFixed(0)}%`}
+                                >
+                                  {getExpenseCategoryData().map((entry, index) => (
+                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                  ))}
+                                </Pie>
+                                <Tooltip formatter={(value) => `$${value}`} />
+                              </PieChart>
+                            </ResponsiveContainer>
+                          ) : (
+                            <div className="h-full flex items-center justify-center text-gray-500">
+                              No expense data available
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+                      
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="flex items-center">
+                            <BarChartIcon className="h-5 w-5 mr-2" />
+                            Monthly Overview
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="h-[300px]">
+                          {getMonthlyData().length > 0 ? (
+                            <ResponsiveContainer width="100%" height="100%">
+                              <BarChart data={getMonthlyData()}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip formatter={(value) => `$${value}`} />
+                                <Legend />
+                                <Bar dataKey="income" fill="#4ade80" name="Income" />
+                                <Bar dataKey="expense" fill="#f87171" name="Expense" />
+                              </BarChart>
+                            </ResponsiveContainer>
+                          ) : (
+                            <div className="h-full flex items-center justify-center text-gray-500">
+                              No monthly data available
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+                    
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="flex items-center">
+                            <LineChartIcon className="h-5 w-5 mr-2" />
+                            Balance Trend
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="h-[300px]">
+                          {getMonthlyData().length > 0 ? (
+                            <ResponsiveContainer width="100%" height="100%">
+                              <LineChart data={getMonthlyData()}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip formatter={(value) => `$${value}`} />
+                                <Legend />
+                                <Line 
+                                  type="monotone" 
+                                  dataKey="balance" 
+                                  stroke="#8884d8" 
+                                  activeDot={{ r: 8 }} 
+                                  name="Balance"
+                                />
+                              </LineChart>
+                            </ResponsiveContainer>
+                          ) : (
+                            <div className="h-full flex items-center justify-center text-gray-500">
+                              No trend data available
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+                      
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="flex items-center">
+                            <TrendingUp className="h-5 w-5 mr-2" />
+                            Income & Expense Area
+                          </CardTitle>
+                        </CardHeader>
+                        <CardContent className="h-[300px]">
+                          {getMonthlyData().length > 0 ? (
+                            <ResponsiveContainer width="100%" height="100%">
+                              <AreaChart data={getMonthlyData()}>
+                                <CartesianGrid strokeDasharray="3 3" />
+                                <XAxis dataKey="name" />
+                                <YAxis />
+                                <Tooltip formatter={(value) => `$${value}`} />
+                                <Legend />
+                                <Area 
+                                  type="monotone" 
+                                  dataKey="income" 
+                                  stackId="1" 
+                                  stroke="#4ade80" 
+                                  fill="#4ade80" 
+                                  fillOpacity={0.6}
+                                  name="Income"
+                                />
+                                <Area 
+                                  type="monotone" 
+                                  dataKey="expense" 
+                                  stackId="2" 
+                                  stroke="#f87171" 
+                                  fill="#f87171" 
+                                  fillOpacity={0.6}
+                                  name="Expense"
+                                />
+                              </AreaChart>
+                            </ResponsiveContainer>
+                          ) : (
+                            <div className="h-full flex items-center justify-center text-gray-500">
+                              No area chart data available
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+                    </div>
+                  </TabsContent>
                   
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center">
-                        <TrendingUp className="h-5 w-5 mr-2" />
-                        Income & Expense Area
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent className="h-[300px]">
-                      {getMonthlyData().length > 0 ? (
-                        <ResponsiveContainer width="100%" height="100%">
-                          <AreaChart data={getMonthlyData()}>
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis dataKey="name" />
-                            <YAxis />
-                            <Tooltip formatter={(value) => `$${value}`} />
-                            <Legend />
-                            <Area 
-                              type="monotone" 
-                              dataKey="income" 
-                              stackId="1" 
-                              stroke="#4ade80" 
-                              fill="#4ade80" 
-                              fillOpacity={0.6}
-                              name="Income"
-                            />
-                            <Area 
-                              type="monotone" 
-                              dataKey="expense" 
-                              stackId="2" 
-                              stroke="#f87171" 
-                              fill="#f87171" 
-                              fillOpacity={0.6}
-                              name="Expense"
-                            />
-                          </AreaChart>
-                        </ResponsiveContainer>
-                      ) : (
-                        <div className="h-full flex items-center justify-center text-gray-500">
-                          No area chart data available
+                  <TabsContent value="recent">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle>Recent Activity</CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-4">
+                          {transactions.slice(0, 5).map((transaction) => (
+                            <div key={transaction.id} className="flex justify-between items-center p-2 border-b">
+                              <div>
+                                <p className="font-medium">{transaction.category}</p>
+                                <p className="text-sm text-gray-500">
+                                  {new Date(transaction.date).toLocaleDateString()}
+                                </p>
+                              </div>
+                              <div className={`font-bold ${transaction.type === 'expense' ? 'text-red-500' : 'text-green-500'}`}>
+                                {transaction.type === 'expense' ? '-' : '+'}${transaction.amount.toFixed(2)}
+                              </div>
+                            </div>
+                          ))}
+                          
+                          {transactions.length === 0 && (
+                            <div className="text-center text-gray-500 py-4">
+                              No transactions yet
+                            </div>
+                          )}
                         </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                </Tabs>
               </TabsContent>
               
-              <TabsContent value="recent">
+              <TabsContent value="transactions" className="py-4">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Recent Activity</CardTitle>
+                    <CardTitle>All Transactions</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="space-y-4">
-                      {transactions.slice(0, 5).map((transaction) => (
-                        <div key={transaction.id} className="flex justify-between items-center p-2 border-b">
-                          <div>
-                            <p className="font-medium">{transaction.category}</p>
-                            <p className="text-sm text-gray-500">
-                              {new Date(transaction.date).toLocaleDateString()}
-                            </p>
+                    <div className="space-y-2">
+                      {transactions.length > 0 ? (
+                        transactions.map((transaction) => (
+                          <div 
+                            key={transaction.id} 
+                            className="flex justify-between items-center p-3 rounded-lg border hover:bg-slate-50"
+                          >
+                            <div className="flex items-center">
+                              <div className={`p-2 rounded-full mr-3 ${
+                                transaction.type === 'expense' ? 'bg-red-100' : 'bg-green-100'
+                              }`}>
+                                <CreditCard className={`h-5 w-5 ${
+                                  transaction.type === 'expense' ? 'text-red-500' : 'text-green-500'
+                                }`} />
+                              </div>
+                              <div>
+                                <p className="font-medium">{transaction.category}</p>
+                                <p className="text-sm text-gray-500">
+                                  {transaction.description ? transaction.description : 'No description'}
+                                </p>
+                                <p className="text-xs text-gray-400">
+                                  {new Date(transaction.date).toLocaleDateString()}
+                                </p>
+                              </div>
+                            </div>
+                            <div className={`font-bold ${transaction.type === 'expense' ? 'text-red-500' : 'text-green-500'}`}>
+                              {transaction.type === 'expense' ? '-' : '+'}${transaction.amount.toFixed(2)}
+                            </div>
                           </div>
-                          <div className={`font-bold ${transaction.type === 'expense' ? 'text-red-500' : 'text-green-500'}`}>
-                            {transaction.type === 'expense' ? '-' : '+'}${transaction.amount.toFixed(2)}
-                          </div>
-                        </div>
-                      ))}
-                      
-                      {transactions.length === 0 && (
-                        <div className="text-center text-gray-500 py-4">
-                          No transactions yet
+                        ))
+                      ) : (
+                        <div className="text-center text-gray-500 py-8">
+                          No transactions yet. Click "Add Transaction" to get started.
                         </div>
                       )}
                     </div>
@@ -606,55 +654,8 @@ const Index = () => {
                 </Card>
               </TabsContent>
             </Tabs>
-          </TabsContent>
-          
-          <TabsContent value="transactions" className="py-4">
-            <Card>
-              <CardHeader>
-                <CardTitle>All Transactions</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-2">
-                  {transactions.length > 0 ? (
-                    transactions.map((transaction) => (
-                      <div 
-                        key={transaction.id} 
-                        className="flex justify-between items-center p-3 rounded-lg border hover:bg-slate-50"
-                      >
-                        <div className="flex items-center">
-                          <div className={`p-2 rounded-full mr-3 ${
-                            transaction.type === 'expense' ? 'bg-red-100' : 'bg-green-100'
-                          }`}>
-                            <CreditCard className={`h-5 w-5 ${
-                              transaction.type === 'expense' ? 'text-red-500' : 'text-green-500'
-                            }`} />
-                          </div>
-                          <div>
-                            <p className="font-medium">{transaction.category}</p>
-                            <p className="text-sm text-gray-500">
-                              {transaction.description ? transaction.description : 'No description'}
-                            </p>
-                            <p className="text-xs text-gray-400">
-                              {new Date(transaction.date).toLocaleDateString()}
-                            </p>
-                          </div>
-                        </div>
-                        <div className={`font-bold ${transaction.type === 'expense' ? 'text-red-500' : 'text-green-500'}`}>
-                          {transaction.type === 'expense' ? '-' : '+'}${transaction.amount.toFixed(2)}
-                        </div>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="text-center text-gray-500 py-8">
-                      No transactions yet. Click "Add Transaction" to get started.
-                    </div>
-                  )}
-                </div>
-              </CardContent>
-            </TabsContent>
-          </Tabs>
-        </>
-      );
+          </>
+        );
     }
   };
 
