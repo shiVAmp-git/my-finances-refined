@@ -10,6 +10,7 @@ import AddTransaction from "./pages/AddTransaction";
 import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 import Signup from "./pages/Signup";
+import Home from "./pages/Home";
 
 const queryClient = new QueryClient();
 
@@ -20,8 +21,8 @@ const App = () => (
       <Sonner />
       <BrowserRouter>
         <Routes>
-          {/* Redirect the root path to login */}
-          <Route path="/" element={<Navigate to="/login" replace />} />
+          {/* Home page is now the root route */}
+          <Route path="/" element={<Home />} />
           <Route path="/dashboard" element={<Index />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
