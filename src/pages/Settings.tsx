@@ -1,47 +1,13 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
 import { toast } from "@/components/ui/use-toast";
-import { CheckCircle, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { Link } from 'react-router-dom';
 import ActionButtonList from '@/components/ActionButtonList';
 
-const templates = [
-  {
-    id: 'default',
-    name: 'Default',
-    description: 'The default finance tracker layout with cards and charts.'
-  },
-  {
-    id: 'minimal',
-    name: 'Minimal',
-    description: 'A simplified view focusing on recent transactions only.'
-  },
-  {
-    id: 'detailed',
-    name: 'Detailed',
-    description: 'An expanded view with more detailed charts and categories.'
-  }
-];
-
 const Settings = () => {
-  const [activeTemplate, setActiveTemplate] = useState(() => {
-    const saved = localStorage.getItem('activeTemplate');
-    return saved || 'default';
-  });
-
-  const handleTemplateChange = (templateId: string) => {
-    setActiveTemplate(templateId);
-    localStorage.setItem('activeTemplate', templateId);
-    toast({
-      title: "Template changed",
-      description: `You are now using the ${templates.find(t => t.id === templateId)?.name} template.`,
-    });
-  };
-
   return (
     <div className="container max-w-4xl mx-auto py-8 px-4">
       <header className="flex items-center mb-8">
@@ -52,34 +18,6 @@ const Settings = () => {
         </Link>
         <h1 className="text-3xl font-bold">Settings</h1>
       </header>
-
-      <Card className="mb-8">
-        <CardHeader>
-          <CardTitle>Choose Template</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <RadioGroup 
-            value={activeTemplate} 
-            onValueChange={handleTemplateChange}
-            className="space-y-4"
-          >
-            {templates.map(template => (
-              <div key={template.id} className="flex items-start space-x-2">
-                <RadioGroupItem value={template.id} id={template.id} className="mt-1" />
-                <div className="flex-1">
-                  <Label htmlFor={template.id} className="flex items-center text-base font-medium">
-                    {template.name}
-                    {activeTemplate === template.id && (
-                      <CheckCircle className="ml-2 h-4 w-4 text-green-500" />
-                    )}
-                  </Label>
-                  <p className="text-sm text-muted-foreground">{template.description}</p>
-                </div>
-              </div>
-            ))}
-          </RadioGroup>
-        </CardContent>
-      </Card>
 
       <Card>
         <CardHeader>

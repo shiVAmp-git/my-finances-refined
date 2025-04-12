@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { 
   Plus, 
   PieChart, 
@@ -8,26 +8,18 @@ import {
   Download, 
   Settings,
   TrendingUp,
-  Layout,
-  LayoutGrid,
-  LayoutList,
 } from 'lucide-react';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
 
 const ActionButtonList = () => {
-  const navigate = useNavigate();
-  
   const handleExportData = () => {
     try {
       const transactions = localStorage.getItem('transactions');
@@ -68,15 +60,6 @@ const ActionButtonList = () => {
     }
   };
 
-  const switchTemplate = (templateId: string) => {
-    localStorage.setItem('activeTemplate', templateId);
-    navigate(`/?template=${templateId}`);
-    toast({
-      title: "Template changed",
-      description: `Template switched to ${templateId.charAt(0).toUpperCase() + templateId.slice(1)}`,
-    });
-  };
-
   return (
     <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3 items-end">
       <DropdownMenu>
@@ -92,38 +75,6 @@ const ActionButtonList = () => {
               <span>Add Transaction</span>
             </Link>
           </DropdownMenuItem>
-          
-          <DropdownMenuSub>
-            <DropdownMenuSubTrigger className="cursor-pointer px-4 py-3 hover:bg-slate-100 rounded-md">
-              <div className="flex items-center gap-3 w-full">
-                <Layout className="h-5 w-5 text-blue-500" />
-                <span>Switch Template</span>
-              </div>
-            </DropdownMenuSubTrigger>
-            <DropdownMenuSubContent className="bg-white p-2 shadow-lg rounded-lg">
-              <DropdownMenuItem className="cursor-pointer px-4 py-3 hover:bg-slate-100 rounded-md"
-                onClick={() => switchTemplate('default')}>
-                <div className="flex items-center gap-3 w-full">
-                  <Layout className="h-5 w-5 text-gray-500" />
-                  <span>Default</span>
-                </div>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer px-4 py-3 hover:bg-slate-100 rounded-md"
-                onClick={() => switchTemplate('minimal')}>
-                <div className="flex items-center gap-3 w-full">
-                  <LayoutList className="h-5 w-5 text-gray-500" />
-                  <span>Minimal</span>
-                </div>
-              </DropdownMenuItem>
-              <DropdownMenuItem className="cursor-pointer px-4 py-3 hover:bg-slate-100 rounded-md"
-                onClick={() => switchTemplate('detailed')}>
-                <div className="flex items-center gap-3 w-full">
-                  <LayoutGrid className="h-5 w-5 text-gray-500" />
-                  <span>Detailed</span>
-                </div>
-              </DropdownMenuItem>
-            </DropdownMenuSubContent>
-          </DropdownMenuSub>
           
           <DropdownMenuItem className="cursor-pointer px-4 py-3 hover:bg-slate-100 rounded-md">
             <div className="flex items-center gap-3 w-full" onClick={handleExportData}>
