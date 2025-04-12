@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PieChart, Pie, Cell, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, Tooltip, Legend } from 'recharts';
 import { Plus, CreditCard, ArrowDownCircle, ArrowUpCircle, DollarSign } from "lucide-react";
+import ActionButtonList from '@/components/ActionButtonList';
 
 const Index = () => {
   const [transactions, setTransactions] = useState<any[]>([]);
@@ -229,6 +230,9 @@ const Index = () => {
           </Card>
         </TabsContent>
       </Tabs>
+
+      {/* Add the ActionButtonList component */}
+      <ActionButtonList />
     </div>
   );
 };
