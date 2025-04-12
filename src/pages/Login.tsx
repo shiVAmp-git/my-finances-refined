@@ -25,7 +25,7 @@ const Login = () => {
       console.log('Login attempt with:', { email, password, rememberMe });
       // In a real app, this would call an authentication service
       // For demo, we'll just redirect to the dashboard
-      navigate('/');
+      navigate('/dashboard');
     }
   };
 

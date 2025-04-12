@@ -34,7 +34,7 @@ const NavBar = () => {
         <NavigationMenu className="mx-auto md:mx-0">
           <NavigationMenuList>
             <NavigationMenuItem>
-              <Link to="/">
+              <Link to="/dashboard">
                 <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                   <LayoutDashboard className="mr-2 h-4 w-4" />
                   Dashboard
