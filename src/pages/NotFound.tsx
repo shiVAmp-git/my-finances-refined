@@ -2,9 +2,12 @@
 import React from 'react';
 import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
-import { Home, ArrowLeft } from 'lucide-react';
+import { Home, ArrowLeft, LogIn } from 'lucide-react';
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const NotFound = () => {
+  const isMobile = useIsMobile();
+  
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 text-center bg-gray-50">
       <div className="w-full max-w-md space-y-6">
@@ -29,6 +32,15 @@ const NotFound = () => {
             <ArrowLeft size={16} />
             Go Back
           </Button>
+          <Link to="/login">
+            <Button 
+              variant="secondary" 
+              className="w-full sm:w-auto flex items-center gap-2"
+            >
+              <LogIn size={16} />
+              Login
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
