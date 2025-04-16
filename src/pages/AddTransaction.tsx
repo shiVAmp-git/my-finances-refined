@@ -20,6 +20,9 @@ const AddTransaction = () => {
   const handleAddTransaction = (newTransaction: any) => {
     const transactions = getTransactions();
     saveTransactions([...transactions, newTransaction]);
+    
+    // Navigate to dashboard instead of index page
+    navigate('/dashboard');
   };
 
   return (
